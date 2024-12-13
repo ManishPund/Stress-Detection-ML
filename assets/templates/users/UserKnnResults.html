@@ -1,0 +1,110 @@
+{% extends 'users/userbase.html' %} {% load static %} {% block contents %}
+<style>
+  /* Style for the section title and headers */
+  .section_title {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #2c3e50; /* Dark blue */
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    font-size: 1.3em;
+    color: #34495e; /* Slightly lighter blue */
+    margin-bottom: 10px;
+  }
+
+  h3 font {
+    font-weight: bold;
+  }
+  .results-table h2 {
+    font-size: 2em;
+    margin-bottom: 15px;
+    color: #2c3e50;
+    text-align: center; /* Center align the table name */
+  }
+
+  /* Center the table and results text */
+  .results-table {
+    width: 80%;
+    margin: 20px auto;
+    font-size: 1.1em;
+    color: #555;
+  }
+
+  .results-table h2 {
+    font-size: 2em;
+    margin-bottom: 15px;
+    color: #2c3e50;
+  }
+
+  /* Style the data table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border: 1px solid #ddd;
+  }
+
+  th,
+  td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    color: #333; /* Dark text */
+    background-color: #f8f8f8; /* Light cell background */
+  }
+
+  th {
+    background-color: #2980b9; /* Blue header background */
+    color: white; /* White text for headers */
+  }
+
+  tr:hover {
+    background-color: #d1e7dd; /* Light green hover effect */
+  }
+
+  .results-text {
+    text-align: center;
+    margin-top: 30px;
+  }
+
+  .features_row {
+    margin-top: 50px;
+  }
+</style>
+
+<div class="features">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="section_title_container text-center">
+          <h2 class="section_title">KNN Algorithm Results</h2>
+          <h3>Accuracy: <font color="Green">{{ accuracy }}</font></h3>
+          <br />
+          <h3>
+            Classification Error:
+            <font color="Green">{{ classificationerror }}</font>
+          </h3>
+          <h3>Sensitivity: <font color="Green">{{ sensitivity }}</font></h3>
+          <h3>Specificity: <font color="Green">{{ Specificity }}</font></h3>
+          <h3>False Positive Rate: <font color="Green">{{ fsp }}</font></h3>
+          <h3>Precision: <font color="Green">{{ precision }}</font></h3>
+        </div>
+
+        <!-- Centered Results Table -->
+        <div class="results-table">
+          <h2>Results Table</h2>
+          <font color="Black"> {{ data | safe }} </font>
+        </div>
+      </div>
+    </div>
+
+    <!-- Additional rows or features if needed -->
+    <div class="row features_row">
+      <!-- Placeholder for any additional elements or design components -->
+    </div>
+  </div>
+</div>
+
+{% endblock %}

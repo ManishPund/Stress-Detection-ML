@@ -1,0 +1,270 @@
+{% extends 'users/userbase.html' %}
+{% load static %}
+{% block contents %}
+
+<!-- Add CSS Styles Here -->
+<style>
+  /* Overall Page Styling */
+  body {
+    font-family: "Arial", sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #333;
+  }
+
+  /* Container Styling */
+  .features {
+    padding: 100px 0;
+    background-color: #f9f9f9;
+    text-align: center;
+  }
+
+  .section_title {
+    font-size: 2em;
+    color: #2c3e50;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-weight: bold;
+  }
+
+  /* Calendar Grid Styling */
+  .calendar-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px; /* Space between tiles */
+    padding: 20px;
+    justify-items: center;
+  }
+
+  /* Date Tile Styling */
+  .date-tile {
+    
+    padding: 15px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 150px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+
+  .date-tile h3 {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #2c3e50;
+  }
+
+  .date-tile:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .right-text {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 5px;
+  }
+
+  /* Table Styling */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  th,
+  td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    font-size: 1em;
+    color: #333;
+  }
+
+  th {
+    background-color: #00f7ff;
+    color: #333;
+    font-weight: bold;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  tr:hover {
+    background-color: #e2e2e2;
+  }
+
+  /* Image Styling */
+  td img {
+    border-radius: 5px;
+    max-width: 45px;
+    max-height: 45px;
+    object-fit: cover;
+  }
+
+  /* Link Styling */
+  .btn-link {
+    color: #333;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .btn-link:hover {
+    text-decoration: underline;
+    color: #555;
+  }
+
+  /* Glossy Effect for Tiles */
+  .tile-not-in-stress {
+    background: rgba(144, 238, 144, 0.8); /* Light green */
+    box-shadow: 0 4px 10px rgba(144, 238, 144, 0.4);
+    backdrop-filter: blur(10px);
+    color: #2c3e50;
+  }
+
+  .tile-in-stress {
+    background: rgba(255, 99, 71, 0.8); /* Light red */
+    box-shadow: 0 4px 10px rgba(255, 99, 71, 0.4);
+    backdrop-filter: blur(10px);
+    color: white;
+  }
+
+  .tile-neutral {
+    background: rgba(211, 211, 211, 0.8); /* Light grey */
+    box-shadow: 0 4px 10px rgba(211, 211, 211, 0.4);
+    backdrop-filter: blur(10px);
+    color: #333;
+  }
+
+
+
+  .date-tile:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Mobile Responsive Design */
+  @media (max-width: 768px) {
+    .calendar-container {
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+    }
+
+    .date-tile {
+      max-width: 120px;
+      padding: 10px;
+    }
+
+    .date-tile h3 {
+      font-size: 1em;
+    }
+  }
+  
+</style>
+
+<!-- Link to Bootstrap 5.3.3 CSS -->
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+<!-- Link to Bootstrap 5.3.3 JS -->
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+<div class="features">
+  <div class="container">
+    <div class="section_title_container text-center">
+      <h2 class="section_title">Results Table</h2>
+    </div>
+    {% if grouped_data %}
+    <div class="calendar-container">
+      {% for date, data in grouped_data.items %}
+      <div class="date-tile 
+      {% if data.stress_status == 'Not in Stress' %}
+        tile-not-in-stress
+      {% elif data.stress_status == 'In Stress' %}
+        tile-in-stress
+      {% else %}
+        tile-neutral
+      {% endif %}" 
+data-bs-toggle="collapse" 
+data-bs-target="#collapse{{ forloop.counter }}" 
+aria-expanded="false" 
+aria-controls="collapse{{ forloop.counter }}">
+        <h3>{{ date }}</h3>
+        <span class="right-text">{{ data.stress_status }}</span>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Accordion for Collapsible Content -->
+    <div class="accordion mt-4" id="resultsAccordion">
+      {% for date, data in grouped_data.items %}
+      <div class="accordion-item">
+        <div class="collapse" id="collapse{{ forloop.counter }}" data-bs-parent="#resultsAccordion">
+          <div class="accordion-header text-center">
+            <h4>{{ date }}</h4> <!-- Display the date as a header -->
+          </div>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">S.No</th>
+                <th scope="col">User Name</th>
+                <th scope="col">File Name</th>
+                <th scope="col">Emotions</th>
+                
+                <th scope="col">Time</th>
+                <th scope="col">Image</th>
+                <th scope="col">Download</th>
+                <th scope="col">Emotions View</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for entry in data.entries %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ entry.username }}</td>
+                <td>{{ entry.filename }}</td>
+                <td>{{ entry.emotions }}</td>
+                
+                <td>{{ entry.cdate|date:"h:i:s A" }}</td>
+                <td>
+                  <img src="{{ entry.file }}" />
+                </td>
+                <td>
+                  <a class="btn-link" href="{{ entry.file }}" target="_blank">Download</a>
+                </td>
+                <td>
+                  <a class="btn-link" href="javascript:void(0);" onclick="openAndCloseEmotionPage('{{ entry.filename }}')">Emotions View</a>
+                </td>
+                
+                
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-center text-muted">No results available.</p>
+    {% endif %}
+  </div>
+</div>
+
+<script>
+  function openAndCloseEmotionPage(filename) {
+    // Open a new window with the emotion detection page
+    var newWindow = window.open('/UserEmotionsDetect/?imgname=' + filename, '_blank');
+    
+    // Wait 1 second before closing the new window
+    setTimeout(function() {
+      newWindow.close();  // Close the newly opened window
+    }, 1000);  // 1000 ms = 1 second
+  }
+</script>
+
+{% endblock %}

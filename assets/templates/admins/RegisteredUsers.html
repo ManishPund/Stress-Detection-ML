@@ -1,0 +1,160 @@
+{% extends 'admins/adminbase.html' %} {% load static %} {% block contents %}
+
+<!-- Add CSS Styles Here -->
+<style>
+  body {
+    font-family: "Arial", sans-serif; /* Modern sans-serif font */
+  }
+
+  .home_slider_content {
+    position: absolute;
+    top: 160px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: #333; /* Dark grey color for better readability */
+  }
+
+  .home_slider_title {
+    font-size: 2.5em; /* Increase title size */
+    font-weight: bold;
+    color: #2c3e50; /* Dark blue color */
+    margin-bottom: 10px; /* Spacing below title */
+  }
+
+  .home_slider_subtitle {
+    font-size: 1.5em;
+    color: #34495e; /* Slightly lighter blue */
+    margin-bottom: 20px; /* Spacing below subtitle */
+  }
+
+  .home_slider_form_container {
+    width: 80%; /* Set the desired width */
+    margin: 0 auto; /* Center the container */
+    margin-top: 20px;
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #555; /* Medium grey for better contrast */
+  }
+
+  /* Table container with horizontal scroll enabled */
+  .table-container {
+    max-height: 600px; /* Adjust the height as needed */
+    overflow-y: auto; /* Vertical scroll if needed */
+    overflow-x: auto; /* Horizontal scroll if needed */
+    margin-top: 20px;
+  }
+
+  table {
+    width: 100%; /* Full width of the container */
+    border-collapse: collapse;
+    border: 1px solid #ddd; /* Light border for the table */
+    border-radius: 8px; /* Rounded corners */
+    overflow: hidden; /* Clip corners */
+  }
+
+  td {
+    padding: 12px; /* Increase padding */
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    color: #333; /* Dark grey for table text */
+    background-color: #f8f8f8; /* Light background for table cells */
+  }
+
+  th {
+    background-color: #2884c2; /* Blue header background */
+    color: rgb(0, 0, 0); /* White text for header */
+    font-weight: bold; /* Bold text for header */
+  }
+
+  tr:hover {
+    background-color: #d1e7dd; /* Light green on hover */
+  }
+
+  .btn-link {
+    text-decoration: none;
+    font-weight: bold;
+    color: #2980b9; /* Matching blue for links */
+  }
+
+  .btn-link:hover {
+    text-decoration: underline;
+    color: #1f6d99; /* Darker blue on hover */
+  }
+</style>
+
+<div class="home">
+  <div class="home_slider_container">
+    <!-- Home Slider -->
+    <div class="owl-carousel owl-theme home_slider">
+      <!-- Home Slider Item -->
+      <div class="owl-item">
+        <div
+          class="home_slider_background"
+          style="
+            background-image: url('{% static 'images/home_slider_1.jpg' %}');
+          "
+        ></div>
+        <div class="home_slider_content">
+          <div class="container">
+            <div class="row">
+              <div class="col text-center">
+                <div class="home_slider_title">
+                  Registered Users and Activation
+                </div>
+                <div class="home_slider_subtitle">
+                  Manage your registered users efficiently
+                </div>
+                <div class="home_slider_form_container">
+                  <div class="table-container">
+                    <table border="0" class="table table-hover table-dark">
+                      <thead>
+                        <tr class="table-danger">
+                          <th scope="col">S.No</th>
+                          <th scope="col">Name</th>
+                          <th scope="col">Login ID</th>
+                          <th scope="col">Mobile</th>
+                          <th scope="col">Email</th>
+
+                          <th scope="col">Status</th>
+                          <th scope="col">Activate</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for i in data %}
+                        <tr scope="row" style="background-color: #fdfdfd">
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ i.name }}</td>
+                          <td>{{ i.loginid }}</td>
+                          <td>{{ i.mobile }}</td>
+                          <td>{{ i.email }}</td>
+
+                          <td>{{ i.status }}</td>
+                          {% if i.status == 'waiting' %}
+                          <td>
+                            <a
+                              class="btn-link"
+                              href="/AdminActivaUsers/?uid={{ i.id }}"
+                            >
+                              Activate
+                            </a>
+                          </td>
+                          {% else %}
+                          <td>Activated</td>
+                          {% endif %}
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

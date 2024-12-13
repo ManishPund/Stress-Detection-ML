@@ -1,0 +1,106 @@
+{% extends 'admins/adminbase.html' %} {% load static %} {% block contents %}
+<!-- Add CSS Styles Here -->
+<style>
+  .section_title_container {
+    margin-bottom: 40px;
+  }
+
+  .section_title {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #2c3e50; /* Dark blue title */
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    font-size: 1.3em;
+    color: #34495e; /* Slightly lighter dark blue for subheadings */
+  }
+
+  h3 font {
+    font-weight: bold;
+  }
+
+  /* Centered table container */
+  .results-container {
+    margin-top: 40px;
+    text-align: center;
+  }
+
+  /* Styling for the results data table */
+  table {
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #fdfdfd; /* Light background */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    border-radius: 8px; /* Rounded corners */
+    overflow: hidden;
+  }
+
+  th,
+  td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+  }
+
+  th {
+    background-color: #2980b9; /* Blue background for header */
+    color: white; /* White text */
+    font-weight: bold;
+  }
+
+  tr:hover {
+    background-color: #d1e7dd; /* Light green on hover */
+  }
+
+  td {
+    color: #333; /* Dark grey text */
+    background-color: #f8f8f8; /* Light background */
+  }
+
+  /* Responsive table for smaller screens */
+  @media (max-width: 768px) {
+    table {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+  }
+</style>
+
+<div class="features">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="section_title_container text-center">
+          <h2 class="section_title">Knn Algorithm Results</h2>
+          <h3>Accuracy: <font color="Green">{{ accuracy }}</font></h3>
+          <br />
+          <h3>
+            Classification Error:
+            <font color="Green">{{ classificationerror }}</font>
+          </h3>
+          <h3>Sensitivity: <font color="Green">{{ sensitivity }}</font></h3>
+          <h3>Specificity: <font color="Green">{{ Specificity }}</font></h3>
+          <h3>False Positive Rate: <font color="Green">{{ fsp }}</font></h3>
+          <h3>Precision: <font color="Green">{{ precision }}</font></h3>
+        </div>
+
+        <div class="results-container">
+          <h2>Results Table</h2>
+          <div class="table-responsive">
+            <font color="Black">
+              {{ data | safe }}
+              <!-- Render the table data safely -->
+            </font>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

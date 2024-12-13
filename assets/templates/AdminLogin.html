@@ -1,0 +1,124 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block contents %}
+
+<!-- Add CSS Styles Here -->
+<style>
+  .home_slider_content {
+    position: absolute; /* Position relative to the parent */
+    top: 150px; /* Set the top position to 150px */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Offset by half of its width */
+    text-align: center; /* Center align the text */
+    color: white; /* Change color to make it more readable against the background */
+  }
+
+  .home_slider_title {
+    font-size: 2em; /* Adjust size as needed */
+    font-weight: bold; /* Optional: make it bold */
+  }
+
+  .home_slider_subtitle {
+    font-size: 1.5em; /* Adjust size as needed */
+    margin-top: 10px; /* Space between title and subtitle */
+  }
+
+  .form-group {
+    margin-bottom: 15px; /* Spacing between form fields */
+  }
+
+  /* Button styles */
+  .btn-custom {
+    margin-left: 20%;
+    width: 60%; /* Width of the button */
+  }
+
+  /* Centering the form */
+  .home_slider_form_container {
+    display: flex;
+    justify-content: center; /* Center the form horizontally */
+    align-items: center; /* Center the form vertically */
+    flex-direction: column; /* Stack items vertically */
+    margin-top: 50px; /* Adjust spacing from the top */
+  }
+
+  /* Background image styling */
+  .home_slider_background {
+    background-image: url('{% static "images/home_slider_1.jpg" %}');
+    background-size: cover; /* Ensures the image covers the entire area */
+    background-position: center center; /* Keeps the background image centered */
+    height: 100vh; /* Full viewport height */
+  }
+
+  .form-control {
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white background */
+    border: 1px solid #ccc; /* Light grey border */
+    color: #333; /* Dark text color for the inputs */
+  }
+</style>
+
+<div class="home">
+  <!-- Removed the owl-carousel slider container and its items -->
+  <div class="home_slider_background"> <!-- Background remains here -->
+    <div class="home_slider_content">
+      <div class="container">
+        <div class="row">
+          <div class="col text-center">
+            <div class="home_slider_title">Admin Login Form</div>
+            <div class="home_slider_subtitle"></div>
+            <div class="home_slider_form_container">
+              <form
+                action="{% url 'AdminLoginCheck' %}"
+                method="POST"
+                class="text-primary"
+                style="width: 100%"
+              >
+                {% csrf_token %}
+                <div class="form-group row">
+                  <div class="col-md-12">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="loginid"
+                      required
+                      placeholder="Enter Login Id"
+                    />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-12">
+                    <input
+                      type="password"
+                      class="form-control"
+                      name="pswd"
+                      required
+                      placeholder="Enter password"
+                    />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-12">
+                    <button
+                      class="btn btn-block btn-primary text-white py-3 px-5 btn-custom"
+                      type="submit"
+                    >
+                      Login
+                    </button>
+                  </div>
+                </div>
+
+                {% if messages %} 
+                  {% for message in messages %}
+                    <font color="RED"> {{ message }}</font>
+                  {% endfor %} 
+                {% endif %}
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

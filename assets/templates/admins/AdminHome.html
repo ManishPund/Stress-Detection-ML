@@ -1,0 +1,66 @@
+{% extends 'admins/adminbase.html' %} 
+{% load static %} 
+{% block contents %}
+
+<!-- Add CSS Styles Here -->
+<style>
+  .home_slider_content {
+    position: absolute; /* Position relative to the parent */
+    top: 150px; /* Set the top position to 150px */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Offset by half of its width */
+    text-align: center; /* Center align the text */
+    color: white; /* Change color to make it more readable against the background */
+  }
+
+  .home_slider_title {
+    font-size: 2em; /* Adjust size as needed */
+    font-weight: bold; /* Optional: make it bold */
+  }
+
+  .home_slider_subtitle {
+    font-size: 1.5em; /* Adjust size as needed */
+    margin-top: 10px; /* Space between title and subtitle */
+  }
+
+  .home_slider_form_container {
+    margin-top: 20px; /* Add some margin at the top of the content */
+    font-size: 1.1em; /* Slightly increase the font size */
+    line-height: 1.6; /* Adjust line height for better readability */
+  }
+
+  .home_slider_background {
+    background-image: url('{% static "images/home_slider_1.jpg" %}');
+    background-size: cover; /* Ensures the image covers the entire area */
+    background-position: center center; /* Keeps the background image centered */
+    height: 118vh; /* Full viewport height */
+  }
+</style>
+
+<div class="home">
+  <div class="home_slider_background"> <!-- Background remains here -->
+    <div class="home_slider_content">
+      <div class="container">
+        <div class="row">
+          <div class="col text-center">
+            <div class="home_slider_title">
+              Stress Detection
+            </div>
+            <div class="home_slider_subtitle">
+              by Image Processing and Machine Learning
+            </div>
+            <div class="home_slider_form_container">
+              <p>
+                <font color="Black">
+                  The primary goal of our project is to detect stress levels by using advanced Machine Learning and Image Processing techniques. Unlike traditional stress detection systems, which often overlook real-time analysis and personalized intervention, our system provides live detection and continuous monitoring. It analyzes both physical and mental stress indicators, offering real-time feedback on the well-being of employees. Additionally, the system incorporates periodic surveys to assess stress levels and recommend appropriate measures for stress management. Ultimately, our project aims to create a healthier, more productive work environment by helping IT professionals manage stress effectively, ensuring optimal performance and well-being during their workday.
+                </font>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends 'users/userbase.html' %} {% load static %} {% block contents %}
+
+<!-- Add CSS Styles Here -->
+<style>
+  .home_slider_content {
+    position: absolute; /* Position relative to the parent */
+    top: 150px; /* Set the top position to 150px */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Offset by half of its width */
+    text-align: center; /* Center align the text */
+    color: white; /* Change color to make it more readable against the background */
+  }
+
+  .home_slider_title {
+    font-size: 2em; /* Adjust size as needed */
+    font-weight: bold; /* Optional: make it bold */
+  }
+
+  .home_slider_subtitle {
+    font-size: 1.5em; /* Adjust size as needed */
+    margin-top: 10px; /* Space between title and subtitle */
+  }
+
+  .home_slider_form_container {
+    margin-top: 20px; /* Adjust spacing from the top */
+  }
+
+  /* Style for the text inside the form container */
+  .home_slider_form_container p {
+    font-size: 1em; /* Font size */
+  }
+
+  /* Link style */
+  .home_slider_form_container a {
+    color: #ffcc00; /* Color for the link */
+    text-decoration: underline; /* Underline the link */
+  }
+</style>
+
+<div class="home">
+  <div class="home_slider_container">
+    <!-- Home Slider -->
+    <div class="owl-carousel owl-theme home_slider">
+      <!-- Home Slider Item -->
+      <div class="owl-item">
+        <div
+          class="home_slider_background"
+          style="
+            background-image: url('{% static 'images/home_slider_1.jpg' %}');
+          "
+        ></div>
+        <div class="home_slider_content">
+          <div class="container">
+            <div class="row">
+              <div class="col text-center">
+                <div class="home_slider_title">
+                  Stress Detection in IT Professionals
+                </div>
+                <div class="home_slider_subtitle">
+                  by Image Processing and Machine Learning
+                </div>
+                <div class="home_slider_form_container">
+                  <p>
+                    <font color="black">
+                      Detecting By Keras model
+                      <a href="{% url 'UserKerasModel' %}">Live</a> Now
+                    </font>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,319 @@
+{% extends 'admins/adminbase.html' %}
+{% load static %}
+{% block contents %}
+
+<!-- Add CSS Styles Here -->
+<style>
+  body {
+    font-family: "Arial", sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #333;
+  }
+
+  .features {
+    background-color: #f9f9f9;
+    padding: 100px 0; /* Reduce padding to make section more compact */
+  }
+
+  .home_slider_title {
+    font-size: 2.2em; /* Slightly smaller title size */
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .home_slider_subtitle {
+    font-size: 1.3em; /* Adjust subtitle size */
+    color: #34495e;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .home_slider_form_container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    margin-top: 20px;
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #555;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+
+  .table-container {
+    max-height: 600px;
+    overflow-y: auto;
+    overflow-x: auto;
+    margin-top: 20px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    table-layout: auto;
+  }
+
+  th,
+  td {
+    padding: 10px; /* Adjust padding to reduce space */
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    color: #333;
+    background-color: #f8f8f8;
+  }
+
+  th {
+    background-color: #2980b9;
+    color: white;
+    font-weight: bold;
+  }
+
+  tr:hover {
+    background-color: #d1e7dd;
+  }
+
+  .btn-link {
+    text-decoration: none;
+    font-weight: bold;
+    color: #2980b9;
+  }
+
+  .btn-link:hover {
+    text-decoration: underline;
+    color: #1f6d99;
+  }
+
+  img {
+    border-radius: 5px;
+  }
+
+  .collapsible {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 12px; /* Reduce padding */
+    width: 100%;
+    border: none;
+    text-align: center;
+    outline: none;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .active,
+  .collapsible:hover {
+    background-color: #ccc;
+  }
+
+  .content {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #ffffff;
+  }
+
+  .tile-not-in-stress {
+    background: rgba(144, 238, 144, 0.8);
+    box-shadow: 0 4px 10px rgba(144, 238, 144, 0.4);
+    backdrop-filter: blur(10px);
+    color: #2c3e50;
+  }
+
+  .tile-in-stress {
+    background: rgba(255, 99, 71, 0.8);
+    box-shadow: 0 4px 10px rgba(255, 99, 71, 0.4);
+    backdrop-filter: blur(10px);
+    color: rgb(0, 0, 0);
+  }
+
+  .tile-neutral {
+    background: rgba(211, 211, 211, 0.8);
+    box-shadow: 0 4px 10px rgba(211, 211, 211, 0.4);
+    backdrop-filter: blur(10px);
+    color: #333;
+  }
+
+  .calendar-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Reduced min-width */
+    gap: 10px; /* Reduced gap between tiles */
+    padding: 20px;
+    justify-items: center;
+  }
+
+  .date-tile {
+    padding: 12px; /* Reduced padding */
+    border-radius: 8px;
+    width: 100%;
+    max-width: 140px; /* Reduced width */
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .date-tile:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .date-tile h3 {
+    font-size: 1.1em; /* Adjust font size for date */
+    font-weight: bold;
+    margin: 10px 0;
+    color: #2c3e50;
+  }
+
+  /* Mobile Responsive Design */
+  @media (max-width: 768px) {
+    .calendar-container {
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Adjust for smaller screens */
+      gap: 8px; /* Smaller gap for mobile */
+    }
+
+    .date-tile {
+      max-width: 100px; /* Smaller tiles for mobile */
+      padding: 8px;
+    }
+
+    .date-tile h3 {
+      font-size: 1em; /* Smaller font size for mobile */
+      margin: 8px 0;
+    }
+  }
+
+</style>
+
+
+<!-- Link to Bootstrap 5.3.3 CSS -->
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+<!-- Link to Bootstrap 5.3.3 JS -->
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+<div class="features">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="home_slider_title">
+          Stress Detection in IT Professionals
+        </div>
+        <div class="home_slider_subtitle">Admin View All Users Data</div>
+        <div class="home_slider_form_container">
+          <!-- Loop through each username group -->
+          {% for username, dates in data.items %}
+          <button type="button" class="collapsible">{{ username }}</button>
+          <div class="content">
+            <!-- Calendar Tile: click to expand -->
+            <div class="calendar-container">
+              {% for date, details in dates.items %}
+              <div class="date-tile 
+                {% if details.stress_status == 'Not in Stress' %} tile-not-in-stress {% elif details.stress_status == 'In Stress' %} tile-in-stress {% else %} tile-neutral {% endif %}" 
+                data-bs-toggle="collapse" 
+                data-bs-target="#collapse-{{ username|slugify }}-{{ date|slugify }}" 
+                aria-expanded="false" 
+                aria-controls="collapse-{{ username|slugify }}-{{ date|slugify }}">
+                <h3>{{ date }}</h3>
+                <span class="right-text">{{ details.stress_status }}</span>
+              </div>
+              {% endfor %}
+            </div>
+
+            <!-- Collapsible Table for the Date -->
+            {% for date, details in dates.items %}
+            <div class="collapse" id="collapse-{{ username|slugify }}-{{ date|slugify }}">
+              <div class="table-container">
+                <div class="accordion-header text-center">
+                  <h4>{{ date }}</h4> <!-- Display the date as a header -->
+                </div>
+                <table class="table table-hover">
+                  <thead>
+                    <tr class="table-danger">
+                      <th scope="col">S.No</th>
+                      <th scope="col">User Name</th>
+                      <th scope="col">File Name</th>
+                      <th scope="col">Emotions</th>
+                      <th scope="col">Time</th>
+                      <th scope="col">Image</th>
+                      <th scope="col">Download</th>
+                      <th scope="col">Emotions View</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for entry in details.entries %}
+                    <tr>
+                      <th scope="row">{{ forloop.counter }}</th>
+                      <td>{{ entry.username }}</td>
+                    <td>{{ entry.filename }}</td>
+                    <td>{{ entry.emotions }}</td>
+                    <td>{{ entry.cdate|date:"h:i:s A" }}</td>
+                    <td><img src="{{entry.file}}" width="45" height="40"> </td>
+						<td><a class="btn-link" href="{{ entry.file }}" target="_blank">Download</a></td>
+                        <td><a class="btn-link" href="javascript:void(0);" onclick="openAndCloseEmotionPage('{{ entry.filename }}')"
+                               style="color:DARKBLUE">Emotions View</a></td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            {% endfor %}
+          </div> <!-- End content -->
+          {% endfor %} <!-- End for date, details in dates.items -->
+        </div> <!-- End home_slider_form_container -->
+      </div> <!-- End col -->
+    </div> <!-- End row -->
+  </div> <!-- End container -->
+</div> <!-- End features -->
+
+<!-- Script for Collapsible Functionality -->
+<script>
+  var coll = document.getElementsByClassName("collapsible");
+
+  for (var i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+
+      // Get the collapsible content associated with the clicked button
+      var content = this.nextElementSibling;
+
+      // Collapse all other contents
+      var allContents = document.querySelectorAll('.content');
+      allContents.forEach(function(otherContent) {
+        if (otherContent !== content) {
+          otherContent.style.display = 'none';
+        }
+      });
+
+      // Toggle the clicked content
+      if (content.style.display === "block") {
+        content.style.display = "none";
+      } else {
+        content.style.display = "block";
+      }
+    });
+  }
+
+
+  function openAndCloseEmotionPage(filename) {
+    // Open a new window with the emotion detection page
+    var newWindow = window.open('/UserEmotionsDetect/?imgname=' + filename, '_blank');
+    
+    // Wait 1 second before closing the new window
+    setTimeout(function() {
+      newWindow.close();  // Close the newly opened window
+    }, 1000);  // 1000 ms = 1 second
+  }
+
+</script>
+
+
+{% endblock %}

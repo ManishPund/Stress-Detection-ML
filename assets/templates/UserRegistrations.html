@@ -1,0 +1,217 @@
+{% extends 'base.html' %} {% load static %} {% block contents %}
+
+<style>
+  /* Ensure body and html have 100% height */
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+  }
+
+  .home_slider_container {
+    margin: 0;
+    padding: 0;
+    height: 30vh; /* Full viewport height */
+    position: relative;
+  }
+
+  /* Center the form both vertically and horizontally */
+  .home_slider_content {
+    display: flex;
+    justify-content: flex-end; /* Align to the right */
+    align-items: flex-start; /* Top-aligned */
+    min-height: 100vh; /* Full viewport height */
+    padding-top: 10px; /* Adjust top padding to reduce gap */
+    padding-right: 30px; /* Reduce padding to fit content */
+  }
+
+  /* Form container styling */
+  .form-container {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 20px; /* Reduce padding */
+    width: 100%;
+    max-width: 500px; /* Reduce width for better fit */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    margin: 10px auto; /* Reduce margin to minimize vertical space */
+  }
+
+  /* Title styling */
+  .form-title {
+    font-size: 20px; /* Reduce font size */
+    color: #333;
+    margin-bottom: 20px; /* Reduce bottom margin */
+    font-weight: 600;
+  }
+
+  /* Table styling */
+  table {
+    width: 100%;
+  }
+
+  table td {
+    padding: 8px; /* Reduce padding */
+    vertical-align: middle;
+  }
+
+  table td:first-child {
+    font-weight: bold;
+    color: #555;
+    font-size: 14px; /* Reduce label font size */
+  }
+
+  /* Input and textarea styling */
+  table input[type="text"],
+  table input[type="password"],
+  table input[type="email"],
+  table textarea {
+    width: 100%;
+    padding: 5px; /* Reduce padding */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 12px; /* Maintain field font size */
+    color: #333;
+    box-sizing: border-box; /* Ensures consistent sizing */
+  }
+
+  /* Button styling */
+  /* Parent container */
+  .button-container {
+    display: flex;
+    justify-content: center; /* Horizontally centers the button */
+    align-items: center; /* Vertically centers if necessary */
+    margin-top: 20px; /* Adjust top margin as needed */
+  }
+
+  /* Button styling */
+  .comment_button {
+    background-color: #5cb85c;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: -100px;
+  }
+
+  .comment_button:hover {
+    background-color: #4cae4c;
+  }
+
+  /* Message container styling */
+  .message-container {
+    margin-top: 10px; /* Reduce margin */
+    font-size: 12px; /* Reduce font size */
+  }
+
+  .message-container font {
+    color: green;
+  }
+
+  /* Mobile responsive styles */
+  @media screen and (max-width: 768px) {
+    .form-container {
+      padding: 15px;
+    }
+
+    .form-title {
+      font-size: 18px;
+    }
+
+    table td {
+      display: block;
+      width: 100%;
+    }
+
+    table td:first-child {
+      margin-bottom: 10px;
+    }
+
+    table td input,
+    table td textarea {
+      width: 100%;
+    }
+  }
+</style>
+
+<div class="home">
+  <div class="home_slider_container">
+    <!-- Static Content for User Register Form -->
+    <div class="home_slider_background"></div>
+    <div class="home_slider_content">
+      <div class="container">
+        <div class="row">
+          <div class="col text-center">
+            <div class="form-container">
+              <div class="form-title">User Register Form</div>
+              <form
+                action="{% url 'UserRegisterActions' %}"
+                method="POST"
+                class="text-primary comment_form"
+              >
+                {% csrf_token %}
+                <table>
+                  <tr>
+                    <td>User Name</td>
+                    <td>{{ form.name }}</td>
+                  </tr>
+                  <tr>
+                    <td>Login ID</td>
+                    <td>{{ form.loginid }}</td>
+                  </tr>
+                  <tr>
+                    <td>Password</td>
+                    <td>{{ form.password }}</td>
+                  </tr>
+                  <tr>
+                    <td>Mobile</td>
+                    <td>{{ form.mobile }}</td>
+                  </tr>
+                  <tr>
+                    <td>Email</td>
+                    <td>{{ form.email }}</td>
+                  </tr>
+                  <tr>
+                    <td>Address</td>
+                    <td>{{ form.address }}</td>
+                  </tr>
+                  <tr>
+                    <td>City</td>
+                    <td>{{ form.city }}</td>
+                  </tr>
+                  <tr>
+                    <td>State</td>
+                    <td>{{ form.state }}</td>
+                  </tr>
+                  <tr>
+                    <td>{{ form.status }}</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td>
+                      <button type="submit" class="comment_button trans_200">
+                        Register
+                      </button>
+                    </td>
+                  </tr>
+                </table>
+
+                {% if messages %}
+                <div class="message-container">
+                  {% for message in messages %}
+                  <font>{{ message }}</font>
+                  {% endfor %}
+                </div>
+                {% endif %}
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
