@@ -34,48 +34,20 @@ This project leverages machine learning techniques to detect stress from facial 
    python -m venv env
    source env/bin/activate  # On Windows: env\Scripts\activate
 
+   ```bash
+   pip install -r requirements.txt
+   
+   
+   ```bash
+   python manage.py makemigrations
+   python manage.py migrate
+   Start the development server:
+   
+   ```bash
+   python manage.py runserver
+   Access the application: Open your browser and navigate to http://127.0.0.1:8000.
 
-pip install -r requirements.txt
-
-
-bash
-Copy code
-python manage.py makemigrations
-python manage.py migrate
-Start the development server:
-
-bash
-Copy code
-python manage.py runserver
-Access the application: Open your browser and navigate to http://127.0.0.1:8000.
-
-Project Structure
-plaintext
-Copy code
-Stress-Detection-ML/
-│
-├── README.md               # Project documentation
-├── requirements.txt        # List of dependencies
-├── .gitignore              # Ignored files and directories
-├── src/                    # Source code
-│   ├── manage.py           # Django project management script
-│   ├── main/               # Main application
-│   │   ├── views.py        # Application logic
-│   │   ├── models.py       # Database models
-│   │   ├── templates/      # HTML templates
-│   │   ├── static/         # Static files (CSS, JS, images)
-│   │   └── urls.py         # URL routing
-├── media/                  # Uploaded files and results
-│   ├── uploads/
-│   └── results/
-├── docs/                   # Documentation
-│   ├── project_report.pdf
-│   ├── diagrams/
-│   └── user_manual.pdf
-└── datasets/               # Training and testing datasets
-    ├── train/
-    └── test/
-Usage
+**Usage**
 User: Register, upload images, or use live feed for stress detection. View stress levels in the results table.
 Admin: Manage user accounts and monitor activity.
 Future Enhancements
@@ -85,5 +57,5 @@ Develop a mobile application for better accessibility.
 Integrate cloud storage for scalability.
 
 
-Contact
-For any inquiries, feel free to reach out at [manishpund@outlook.com].
+**Contact**
+For any inquiries, feel free to reach out at manishpund@outlook.com.
