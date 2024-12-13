@@ -1,0 +1,3 @@
+emotion_recognition
+"pillow<7"
+PyEmotion
