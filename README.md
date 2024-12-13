@@ -28,18 +28,15 @@ This project leverages machine learning techniques to detect stress from facial 
    ```bash
    git clone https://github.com/yourusername/Stress-Detection-ML.git
    cd Stress-Detection-ML
-Set up a virtual environment (optional):
+2. **Set up a virtual environment (optional):**
 
-bash
-Copy code
-python -m venv env
-source env/bin/activate  # On Windows: env\Scripts\activate
-Install dependencies:
+   ```bash
+   python -m venv env
+   source env/bin/activate  # On Windows: env\Scripts\activate
 
-bash
-Copy code
+
 pip install -r requirements.txt
-Run database migrations:
+
 
 bash
 Copy code
