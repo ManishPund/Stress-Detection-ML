@@ -26,5 +26,5 @@ This project leverages machine learning techniques to detect stress from facial 
 ### Steps
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/Stress-Detection-ML.git
+   git clone https://github.com/ManishPund/Stress-Detection-ML.git
    cd Stress-Detection-ML
