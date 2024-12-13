@@ -26,5 +26,67 @@ This project leverages machine learning techniques to detect stress from facial 
 ### Steps
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/ManishPund/Stress-Detection-ML.git
+   git clone https://github.com/yourusername/Stress-Detection-ML.git
    cd Stress-Detection-ML
+Set up a virtual environment (optional):
+
+bash
+Copy code
+python -m venv env
+source env/bin/activate  # On Windows: env\Scripts\activate
+Install dependencies:
+
+bash
+Copy code
+pip install -r requirements.txt
+Run database migrations:
+
+bash
+Copy code
+python manage.py makemigrations
+python manage.py migrate
+Start the development server:
+
+bash
+Copy code
+python manage.py runserver
+Access the application: Open your browser and navigate to http://127.0.0.1:8000.
+
+Project Structure
+plaintext
+Copy code
+Stress-Detection-ML/
+│
+├── README.md               # Project documentation
+├── requirements.txt        # List of dependencies
+├── .gitignore              # Ignored files and directories
+├── src/                    # Source code
+│   ├── manage.py           # Django project management script
+│   ├── main/               # Main application
+│   │   ├── views.py        # Application logic
+│   │   ├── models.py       # Database models
+│   │   ├── templates/      # HTML templates
+│   │   ├── static/         # Static files (CSS, JS, images)
+│   │   └── urls.py         # URL routing
+├── media/                  # Uploaded files and results
+│   ├── uploads/
+│   └── results/
+├── docs/                   # Documentation
+│   ├── project_report.pdf
+│   ├── diagrams/
+│   └── user_manual.pdf
+└── datasets/               # Training and testing datasets
+    ├── train/
+    └── test/
+Usage
+User: Register, upload images, or use live feed for stress detection. View stress levels in the results table.
+Admin: Manage user accounts and monitor activity.
+Future Enhancements
+Incorporate multimodal stress indicators such as voice or text analysis.
+Improve the machine learning model for higher accuracy.
+Develop a mobile application for better accessibility.
+Integrate cloud storage for scalability.
+
+
+Contact
+For any inquiries, feel free to reach out at [manishpund@outlook.com].
