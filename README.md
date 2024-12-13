@@ -47,7 +47,7 @@ This project leverages machine learning techniques to detect stress from facial 
    python manage.py runserver
    Access the application: Open your browser and navigate to http://127.0.0.1:8000.
 
-**Usage**
+## Usage
 User: Register, upload images, or use live feed for stress detection. View stress levels in the results table.
 Admin: Manage user accounts and monitor activity.
 Future Enhancements
@@ -57,5 +57,5 @@ Develop a mobile application for better accessibility.
 Integrate cloud storage for scalability.
 
 
-**Contact**
+## Contact
 For any inquiries, feel free to reach out at manishpund@outlook.com.
